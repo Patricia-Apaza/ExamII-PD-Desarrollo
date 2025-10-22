@@ -25,7 +25,7 @@ pipeline {
             steps {
                 timeout(time: 10, unit: 'MINUTES'){
                     // Se cambia <test> por <install> para que se genere el reporte de jacoco
-                    sh "mvn clean install -f SysAsistencia/pom.xml"
+                    sh "mvn clean install -f pom.xml"
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 timeout(time: 4, unit: 'MINUTES'){
                     withSonarQubeEnv('sonarqube'){
-                        sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Pcoverage -f SysAsistencia/pom.xml"
+                        sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Pcoverage -f pom.xml"
                     }
                 }
             }
@@ -52,9 +52,9 @@ pipeline {
             steps {
 			    timeout(time: 8, unit: 'MINUTES'){
 					// Ejecutar mvn spring-boot:run
-					echo "mvn spring-boot:run -f SysAsistencia/pom.xml"
+					echo "mvn spring-boot:run -f pom.xml"
                 }			
-                //echo "mvn spring-boot:run -f SysAsistencia/pom.xml"
+                //echo "mvn spring-boot:run -f pom.xml"
             }
         }
     }
